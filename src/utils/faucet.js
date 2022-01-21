@@ -15,35 +15,35 @@ async function createMintGods(provider, mintCount) {
 
   //! FLAG = 0
   let mintGods = [];
-  // for (let k = 0; k < mintCount; k += 1) {
-    // const [mint, god] = await serumCmn.createMintAndVault(
-  //     provider,
-  //     new BN("1000000000000000000"),
-  //     undefined,
-  //     DECIMALS
-  //   );
-  //   mintGods.push({ mint, god });
+  for (let k = 0; k < mintCount; k += 1) {
+    const [mint, god] = await serumCmn.createMintAndVault(
+      provider,
+      new BN("1000000000000000000"),
+      undefined,
+      DECIMALS
+    );
+    mintGods.push({ mint, god });
     
-  //   console.log(`#${k} mint: ${mint} | god: ${god}`)
-  // }
+    console.log(`#${k} mint: ${mint} | god: ${god}`)
+  }
 
   //! FLAG = 1
-  mintGods.push({
-    mint: new PublicKey('CDwqjuFgz5v9fmcGENJGHPr3aqnz8v1AEMWE8o6f3XXD'),
-    god: new PublicKey('8LiQhj6V4Qss2bqTsLhRxgPS1jW9Y1qsdeyD8cQKAqEG')
-  })
+  // mintGods.push({
+  //   mint: new PublicKey('CDwqjuFgz5v9fmcGENJGHPr3aqnz8v1AEMWE8o6f3XXD'),
+  //   god: new PublicKey('8LiQhj6V4Qss2bqTsLhRxgPS1jW9Y1qsdeyD8cQKAqEG')
+  // })
 
-  mintGods.push({
-    mint: new PublicKey('459PB7Cf1vipoLAUGzLxAe4eoiUahWtUux6LvCtDZHBA'),
-    god: new PublicKey('Ef2hef6biXJvTwiQuME4guH8vek55RkV1TptPbnDzBa4')
-  })
+  // mintGods.push({
+  //   mint: new PublicKey('459PB7Cf1vipoLAUGzLxAe4eoiUahWtUux6LvCtDZHBA'),
+  //   god: new PublicKey('Ef2hef6biXJvTwiQuME4guH8vek55RkV1TptPbnDzBa4')
+  // })
 
   return mintGods;
 }
 
 async function createFundedAccount(provider, mints, newAccount) {
   //! FLAG = 0
-  /*
+  
   if (!newAccount) {
     newAccount = new Account();
   }
@@ -110,16 +110,16 @@ async function createFundedAccount(provider, mints, newAccount) {
 
   console.log(`OK funded MarketMaker with 2 Token`)
   
-  */
+  
 
   //! FLAG = 1
-  const marketMaker = {
-    account: newAccount,
-    tokens: {
-      'CDwqjuFgz5v9fmcGENJGHPr3aqnz8v1AEMWE8o6f3XXD': new PublicKey('46kTRVJaqdecmpie9xnbRLJqewj5ix3aj2k8ZDWK5jqP'),
-      '459PB7Cf1vipoLAUGzLxAe4eoiUahWtUux6LvCtDZHBA': new PublicKey('CTgEdEhfsxj6UxyFwRrEF9NG9G9tcwECRnfxo168jdgB')
-    }
-  }
+  // const marketMaker = {
+  //   account: newAccount,
+  //   tokens: {
+  //     'CDwqjuFgz5v9fmcGENJGHPr3aqnz8v1AEMWE8o6f3XXD': new PublicKey('46kTRVJaqdecmpie9xnbRLJqewj5ix3aj2k8ZDWK5jqP'),
+  //     '459PB7Cf1vipoLAUGzLxAe4eoiUahWtUux6LvCtDZHBA': new PublicKey('CTgEdEhfsxj6UxyFwRrEF9NG9G9tcwECRnfxo168jdgB')
+  //   }
+  // }
   console.dir(marketMaker, {depth: null})
 
   return marketMaker;

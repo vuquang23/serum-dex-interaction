@@ -4,36 +4,19 @@ const { Account, Transaction, PublicKey } = require("@project-serum/anchor").web
 const { OpenOrdersPda, DexInstructions } = require("@project-serum/serum");
 const Base58 = require('base-58')
 const { DEX_PID } = require('./common')
-const {MARKET_KP} = require('./market-lister')
+const { MARKET_KP } = require('./market-lister')
 // Dummy keypair.
 
-// 77YacpyFh7aCyDdScmk7topCnL5KWmpL54TfEdzBKmri
-const KEYPAIR = new Account([
-  114, 152, 121, 134, 171,   9,  58,  13,  67, 140,  51,
-   52, 202, 164,  42,  91, 155,  34, 218, 165,  17, 175,
-  243, 165, 200, 189,   7,  56,  94, 253,  99, 193, 253,
-   21, 188,  48, 252,  92,  85, 239,  45, 148, 235, 204,
-  183,  47, 255, 118,  85,  84, 164, 226,  84, 200, 230,
-   28, 231,  58,  85,  66, 204, 156,  17,  52
-]);
+const KEYPAIR = new Account();
 
 const REFERAL = new Account(Base58.decode('5VE8dNKet98A1G1VWLTatt7hGNNmFf7Pd1ptQsPNBD5vrLfpg6kZ2drYyMU4i8JNGbMogNiwX1YWGZK47eokX559'))
 
 // For9GCz5oSNic3vpLwtSq3aKeqNEbTqBrtEpMQYRKY7i
-const OPENORDERS = new Account([
-  163,  58, 119,  31,   5, 241, 132, 148,  39, 144, 185,
-   41,  32, 122, 236,  96, 122, 229,  94, 200,  70, 207,
-   79, 116,  55, 184,  69,  91, 111, 249, 160,  19, 220,
-    3, 230,  84, 237,  12,  32, 136, 182, 202, 187, 159,
-   45, 224, 189, 184, 192,  77,  47,  23,  45,  71, 187,
-   74, 231, 131, 105,  93, 223, 130, 222,  81
-])
+const OPENORDERS = new Account()
 
 async function initOpenOrders(provider, marketProxy, marketMakerAccounts) {
+  console.log("Open order", OPENORDERS.publicKey.toString())
   const tx = new Transaction();
-
-  // initOpenOrders(owner: PublicKey, market: PublicKey, openOrders: PublicKey, marketAuthority: PublicKey): TransactionInstruction;
-
   tx.add(
     marketProxy.instruction.initOpenOrders(
       marketMakerAccounts.account.publicKey,

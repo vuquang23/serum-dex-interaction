@@ -54,7 +54,7 @@ async function genesis({ provider, proxyProgramId }) {
 
   //
   // Load a proxy client for the market.
-  
+  //
   const marketProxyClient = await marketProxy.load(
     provider.connection,
     proxyProgramId,
@@ -65,13 +65,12 @@ async function genesis({ provider, proxyProgramId }) {
   //
   // Market maker initializes an open orders account.
   //
-  // G1gnED8GCYrTdQ6w33VCteJ2JzEnBKxQ3Uj5HDngdoBU
-  // TODO: when already init
-  // await marketMaker.initOpenOrders(
-  //   provider,
-  //   marketProxyClient,
-  //   marketMakerAccounts
-  // );
+  // TODO: cmt when already init
+  await marketMaker.initOpenOrders(
+    provider,
+    marketProxyClient,
+    marketMakerAccounts
+  );
   console.log("Ok init open orders")
 
   //
@@ -86,13 +85,13 @@ async function genesis({ provider, proxyProgramId }) {
   //
   // Done.
   //
-  // return {
-  //   marketProxyClient,
-  //   mintA: mintGodA.mint,
-  //   usdc: mintGodB.mint,
-  //   godA: mintGodA.god,
-  //   godUsdc: mintGodB.god,
-  // };
+  return {
+    marketProxyClient,
+    mintA: mintGodA.mint,
+    usdc: mintGodB.mint,
+    godA: mintGodA.god,
+    godUsdc: mintGodB.god,
+  };
 }
 
 module.exports = {

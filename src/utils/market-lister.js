@@ -37,9 +37,10 @@ async function list({
   feeRateBps,
 }) {
   const market = MARKET_KP;
+  console.log("market account", market.publicKey.toString())
 
   //! FLAG = 0
-  /*
+  
   const requestQueue = new Account();
   const eventQueue = new Account();
   const bids = new Account();
@@ -172,14 +173,11 @@ async function list({
 
     const txHash = await PROVIDER.send(tx.transaction, tx.signers);
     console.log("tx", txHash)
-
-    // tx aZjGdac8VmyyweeRUUWtCyWcYzYpQ2jGykmNDv7EgZY7tRRR86L2DUwK1fY4T7jAKk55XWWqzb3jU6AUxrVGAHo
-    // tx 3U4V6xNpfMTMh42keoaAYR5ytfjYvPka5tJmqda21HjQVc47h3M1kb3ptW79x3vReQUKGsBPi9nccdTwKsimMXSg
   }
-  */
+  
 
   //! FLAG = 1
-  const vaultOwner = new PublicKey('3wbdBRUKZiQAbgJ3BxxeM4DGgDnrfnrZqGztC4hU45Ri')
+  // const vaultOwner = new PublicKey('3wbdBRUKZiQAbgJ3BxxeM4DGgDnrfnrZqGztC4hU45Ri')
 
   const acc = await connection.getAccountInfo(market.publicKey);
   console.log("market account info", acc)
@@ -205,15 +203,7 @@ async function getVaultOwnerAndNonce(marketPublicKey, dexProgramId = DEX_PID) {
 
 // Dummy keypair for a consistent market address. Helpful when doing UI work.
 // Don't use in production.
-// 4ewibe2KVJ3YJteLqk7kSL5ZDDewfbkU1LcU1Lp9ihi1
-const MARKET_KP = new Account([
-  145, 230, 254, 145, 146, 252, 118, 140, 206, 186,  27,
-  162,  23, 112, 157,  21, 206, 105, 139, 250,   5,  77,
-    9, 107, 238,  23, 149,  46,   9, 157, 133, 245,  54,
-   75, 107, 109, 177, 223, 178, 115, 215, 176, 242, 123,
-   79, 132, 110, 232, 162,  91, 108, 225, 118,  69, 157,
-   80,  27,  46, 109, 146, 157,  86,  35, 242
-]);
+const MARKET_KP = new Account();
 
 module.exports = {
   list,
