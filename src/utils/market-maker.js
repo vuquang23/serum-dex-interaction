@@ -26,7 +26,7 @@ async function initOpenOrders(provider, marketProxy, marketMakerAccounts) {
     )
   );
 
-  let signers = [marketMakerAccounts.account, OPENORDERS.KEYPAIR, REFERAL.KEYPAIR];
+  let signers = [marketMakerAccounts.account, OPENORDERS.KEYPAIR];
   const txHash = await provider.send(tx, signers);
   console.log(txHash)
 }
