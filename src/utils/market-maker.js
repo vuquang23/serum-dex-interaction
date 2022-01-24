@@ -7,7 +7,7 @@ const { DEX_PID } = require('./common')
 const {MARKET_KP} = require('./market-lister')
 // Dummy keypair.
 
-// 77YacpyFh7aCyDdScmk7topCnL5KWmpL54TfEdzBKmri
+// J2wNUJkNBbMgpWSxT6staSUdfnuk9EjMiPVSm5wfMSR1
 const KEYPAIR = new Account([
   114, 152, 121, 134, 171,   9,  58,  13,  67, 140,  51,
    52, 202, 164,  42,  91, 155,  34, 218, 165,  17, 175,
@@ -53,20 +53,11 @@ async function postOrders(provider, marketProxy, marketMakerAccounts) {
     [6.041, 7.8],
     [6.051, 72.3],
     [6.055, 5.4],
-    [6.067, 15.7],
-    [6.077, 390.0],
-    [6.09, 24.0],
-    [6.11, 36.3],
-    [6.133, 300.0],
-    [6.167, 687.8],
   ];
   const bids = [
     [6.004, 8.5],
     [5.995, 12.9],
     [5.987, 6.2],
-    [5.978, 15.3],
-    [5.965, 82.8],
-    [5.961, 25.4],
   ];
   const openOrdersAddressKey = await OpenOrdersPda.openOrdersAddress(
     marketProxy.market.address,
