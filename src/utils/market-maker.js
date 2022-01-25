@@ -50,21 +50,18 @@ async function initOpenOrders(provider, marketProxy, marketMakerAccounts) {
 
 async function postOrders(provider, marketProxy, marketMakerAccounts) {
   const asks = [
-    [6.041, 7.8],
-    [6.051, 72.3],
-    [6.055, 5.4],
+    [4, 10],
   ];
   const bids = [
-    [6.004, 8.5],
-    [5.995, 12.9],
-    [5.987, 6.2],
   ];
+  // created in initOpenOrders
   const openOrdersAddressKey = await OpenOrdersPda.openOrdersAddress(
     marketProxy.market.address,
     marketMakerAccounts.account.publicKey,
     marketProxy.dexProgramId,
     marketProxy.proxyProgramId
   );
+  console.log(`In postOrders - open order account: ${openOrdersAddressKey.toString()}`)
   // Use an explicit signer because the provider wallet, which pays for
   // the tx, is different from the market maker wallet.
   let signers = [marketMakerAccounts.account];

@@ -9,5 +9,5 @@ async function misc() {
     console.log(a.publicKey.toString())
     console.log(a)
 }
-  
+
 misc()
