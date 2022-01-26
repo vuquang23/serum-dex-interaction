@@ -5,9 +5,10 @@ const { Provider, Wallet } = require('@project-serum/anchor')
 require('dotenv').config()
 
 async function misc() {
-    const a = new Account()
-    console.log(a.publicKey.toString())
-    console.log(a)
+
+    // const connection = new Connection('https://api.devnet.solana.com')
+    // const info = await connection.getAccountInfo(new PublicKey('G1gnED8GCYrTdQ6w33VCteJ2JzEnBKxQ3Uj5HDngdoBU'))
+    // console.log(info.owner.toString())
 }
   
 misc()

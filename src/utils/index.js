@@ -45,12 +45,13 @@ async function genesis({ provider, proxyProgramId }) {
     wallet: provider.wallet,
     baseMint: mintGodA.mint,
     quoteMint: mintGodB.mint,
-    baseLotSize: 100000,
     quoteLotSize: 100,
+    baseLotSize: 100000,
     dexProgramId: DEX_PID,
     proxyProgramId,
     feeRateBps: 0,
   });
+  console.log('OK listed market')
 
   //
   // Load a proxy client for the market.

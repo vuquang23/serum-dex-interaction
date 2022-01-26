@@ -63,7 +63,7 @@ async function createFundedAccount(provider, mints, newAccount) {
         SystemProgram.transfer({
           fromPubkey: provider.wallet.publicKey,
           toPubkey: newAccount.publicKey,
-          lamports: 1000000000,
+          lamports: 500000000,
         })
       );
       return tx;
