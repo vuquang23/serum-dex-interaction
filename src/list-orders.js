@@ -1,32 +1,45 @@
-const { OpenOrders, Market, } = require('@project-serum/serum')
+const { OpenOrders, Market, OpenOrdersPda } = require('@project-serum/serum')
 const { web3, Wallet } = require('@project-serum/anchor')
 const Base58 = require('base-58')
+const { PublicKey } = require('@solana/web3.js')
 require('dotenv').config()
 
 async function main() {
     const root = web3.Keypair.fromSecretKey(Base58.decode(process.env.PRIVATEKEY))
     const owner = new web3.Account([
-        163,  58, 119,  31,   5, 241, 132, 148,  39, 144, 185,
-         41,  32, 122, 236,  96, 122, 229,  94, 200,  70, 207,
-         79, 116,  55, 184,  69,  91, 111, 249, 160,  19, 220,
-          3, 230,  84, 237,  12,  32, 136, 182, 202, 187, 159,
-         45, 224, 189, 184, 192,  77,  47,  23,  45,  71, 187,
-         74, 231, 131, 105,  93, 223, 130, 222,  81
+        83, 142,  66, 242, 133,  85, 109,  48,  93, 182,  64,
+        65,  23, 144, 248,  80, 165, 155, 176, 126, 242,  28,
+        27, 172, 139,  53, 200, 226, 145, 147, 102, 115, 126,
+        15,  97, 144,  87, 178, 236,  30, 167, 253, 101, 234,
+       189, 108,   4,   4, 173,   0, 163,  78,  44, 185,  93,
+         5, 177,  53,  70, 253,  20, 202,  39,  96
     ])
+
+    const connection = new web3.Connection("https://api.devnet.solana.com/")
+    const marketAddress = new PublicKey("Ct9Sz8G9ob4MS9roTshd4paTVidAMVSNwnsikgdiPXuH")
+    const programID = new PublicKey('DSgEyE3kT8yK4Je9RSyQcPZrn6bao8nd7cq8KBtgyiz6')
+    const proxyProgramID = new PublicKey('EUdtZVeXMQoqZwyK8fFRoTMDbs9WwW1VAvkMDrdDhbnu')
+    const myMarket = await Market.load(connection, marketAddress, {}, programID, undefined)
+
+    const openOrdersAddressKey = new PublicKey('h5j7AaENLMxRDg1SyNZKdf5bp8ncumJjwwr35h68Ucg')
+    // const openOrdersAddressKey = await OpenOrdersPda.openOrdersAddress(
+    //     marketAddress,
+    //     owner.publicKey,
+    //     programID,
+    //     proxyProgramID
+    // );
 
     // console.log(owner.publicKey.toString())
       
-    const connection = new web3.Connection("https://api.devnet.solana.com/")
-    const marketAddress = new web3.PublicKey("4ewibe2KVJ3YJteLqk7kSL5ZDDewfbkU1LcU1Lp9ihi1")
-    const ownerAddress = new web3.PublicKey('G1gnED8GCYrTdQ6w33VCteJ2JzEnBKxQ3Uj5HDngdoBU') // open order account
-    const programID = new web3.PublicKey('DSgEyE3kT8yK4Je9RSyQcPZrn6bao8nd7cq8KBtgyiz6')
-    // const result = await OpenOrders.findForMarketAndOwner(connection, marketAddress, ownerAddress, programID)
-    // const result2 = await OpenOrders.findForOwner(connection, ownerAddress, programID)
+    
+    // const result = await OpenOrders.findForMarketAndOwner(connection, marketAddress, openOrdersAddressKey, programID)
     // console.log(result)
+    // console.log(result[0].owner.toString())
+
+    // const result2 = await OpenOrders.findForOwner(connection, openOrdersAddressKey, programID)
     // console.log(result2)
-
-
-    const myMarket = await Market.load(connection, marketAddress, {}, programID, undefined)
+    
+    
 
     // const bids = await myMarket.loadBids(connection)
     // console.log(bids)
@@ -44,21 +57,21 @@ async function main() {
 
     // console.log(myMarket.asksAddress.toString())
 
-    const openOrderOfOwners = await myMarket.loadOrdersForOwner(connection, new web3.PublicKey('G1gnED8GCYrTdQ6w33VCteJ2JzEnBKxQ3Uj5HDngdoBU'))
-    // // console.log(openOrderOfOwners)
-    let promises = []
-    let countBuy = 0
-    let countSell = 0
-    for (let e of openOrderOfOwners) {
-        countBuy += (e.side === 'buy')
-        countSell += (e.side === 'sell')
-        // console.log(e)
-        promises.push(myMarket.cancelOrder(connection, owner, e))
-    }
-    const txHash = await Promise.all(promises)
-    console.log(txHash)
-    console.log(countBuy) // initial: 24
-    console.log(countSell) // initial: 35
+    // const openOrderOfOwners = await myMarket.loadOrdersForOwner(connection, new web3.PublicKey('G1gnED8GCYrTdQ6w33VCteJ2JzEnBKxQ3Uj5HDngdoBU'))
+    // // // console.log(openOrderOfOwners)
+    // let promises = []
+    // let countBuy = 0
+    // let countSell = 0
+    // for (let e of openOrderOfOwners) {
+    //     countBuy += (e.side === 'buy')
+    //     countSell += (e.side === 'sell')
+    //     // console.log(e)
+    //     promises.push(myMarket.cancelOrder(connection, owner, e))
+    // }
+    // const txHash = await Promise.all(promises)
+    // console.log(txHash)
+    // console.log(countBuy) // initial: 24
+    // console.log(countSell) // initial: 35
 
     // const requestQueue = await myMarket.loadRequestQueue(connection)
     // console.log(requestQueue)
@@ -79,8 +92,8 @@ async function main() {
     // const txHash = await myMarket.matchOrders(connection, root)
     // console.log(txHash)
 
-    // const openOrdersAccount = await myMarket.findOpenOrdersAccountsForOwner(connection, ownerAddress)
-    // console.log(openOrdersAccount[0].address.toString())
+    const openOrdersAccount = await myMarket.findOpenOrdersAccountsForOwner(connection, openOrdersAddressKey)
+    console.log(openOrdersAccount)
 }
 
 main()

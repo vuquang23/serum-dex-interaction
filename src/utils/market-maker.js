@@ -7,14 +7,14 @@ const { DEX_PID } = require('./common')
 const {MARKET_KP} = require('./market-lister')
 // Dummy keypair.
 
-// J2wNUJkNBbMgpWSxT6staSUdfnuk9EjMiPVSm5wfMSR1
+// 9V5ySLS2jnAGpMrSxAosheo46tkmPAapUxJXRRR6Qq4B
 const KEYPAIR = new Account([
-  114, 152, 121, 134, 171,   9,  58,  13,  67, 140,  51,
-   52, 202, 164,  42,  91, 155,  34, 218, 165,  17, 175,
-  243, 165, 200, 189,   7,  56,  94, 253,  99, 193, 253,
-   21, 188,  48, 252,  92,  85, 239,  45, 148, 235, 204,
-  183,  47, 255, 118,  85,  84, 164, 226,  84, 200, 230,
-   28, 231,  58,  85,  66, 204, 156,  17,  52
+  83, 142,  66, 242, 133,  85, 109,  48,  93, 182,  64,
+  65,  23, 144, 248,  80, 165, 155, 176, 126, 242,  28,
+  27, 172, 139,  53, 200, 226, 145, 147, 102, 115, 126,
+  15,  97, 144,  87, 178, 236,  30, 167, 253, 101, 234,
+ 189, 108,   4,   4, 173,   0, 163,  78,  44, 185,  93,
+   5, 177,  53,  70, 253,  20, 202,  39,  96
 ]);
 
 const REFERAL = new Account(Base58.decode('5VE8dNKet98A1G1VWLTatt7hGNNmFf7Pd1ptQsPNBD5vrLfpg6kZ2drYyMU4i8JNGbMogNiwX1YWGZK47eokX559'))

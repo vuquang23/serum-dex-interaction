@@ -179,7 +179,7 @@ async function list({
   */
 
   //! FLAG = 1
-  const vaultOwner = new PublicKey('3wbdBRUKZiQAbgJ3BxxeM4DGgDnrfnrZqGztC4hU45Ri')
+  const vaultOwner = new PublicKey('BmnM9NdnvMWUTZZ1L2BLRrN5GSnVZ5vYihanbgKW4uXe')
 
   const acc = await connection.getAccountInfo(market.publicKey);
   console.log("market account info", acc)
@@ -205,14 +205,14 @@ async function getVaultOwnerAndNonce(marketPublicKey, dexProgramId = DEX_PID) {
 
 // Dummy keypair for a consistent market address. Helpful when doing UI work.
 // Don't use in production.
-// 4ewibe2KVJ3YJteLqk7kSL5ZDDewfbkU1LcU1Lp9ihi1
+// Ct9Sz8G9ob4MS9roTshd4paTVidAMVSNwnsikgdiPXuH
 const MARKET_KP = new Account([
-  145, 230, 254, 145, 146, 252, 118, 140, 206, 186,  27,
-  162,  23, 112, 157,  21, 206, 105, 139, 250,   5,  77,
-    9, 107, 238,  23, 149,  46,   9, 157, 133, 245,  54,
-   75, 107, 109, 177, 223, 178, 115, 215, 176, 242, 123,
-   79, 132, 110, 232, 162,  91, 108, 225, 118,  69, 157,
-   80,  27,  46, 109, 146, 157,  86,  35, 242
+  37,  50, 159, 196,  29, 243, 191, 228, 197, 137, 177,
+ 221,  43, 105, 155, 141, 119,  70, 193,  47, 123, 204,
+  49, 152, 110,  12, 203,  24, 238, 142, 248, 174, 176,
+ 138, 186, 202, 165, 108, 222,  79,  46, 225, 172, 227,
+ 103,  57, 175,  26,   2,  81,  32, 174, 235,  73,  95,
+ 133,  92,  18,  23, 169,  81, 163, 159, 208
 ]);
 
 module.exports = {
