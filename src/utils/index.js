@@ -67,21 +67,21 @@ async function genesis({ provider, proxyProgramId }) {
   //
   // G1gnED8GCYrTdQ6w33VCteJ2JzEnBKxQ3Uj5HDngdoBU
   // TODO: when already init
-  // await marketMaker.initOpenOrders(
-  //   provider,
-  //   marketProxyClient,
-  //   marketMakerAccounts
-  // );
+  await marketMaker.initOpenOrders(
+    provider,
+    marketProxyClient,
+    marketMakerAccounts
+  );
   console.log("Ok init open orders")
 
   //
   // Market maker posts trades on the orderbook.
   //
-  await marketMaker.postOrders(
-    provider,
-    marketProxyClient,
-    marketMakerAccounts
-  );
+  // await marketMaker.postOrders(
+  //   provider,
+  //   marketProxyClient,
+  //   marketMakerAccounts
+  // );
 
   //
   // Done.

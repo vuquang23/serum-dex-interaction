@@ -55,13 +55,14 @@ async function alice() {
     
     //TODO: loadBids
     // const bids = await myMarket.loadBids(connection)
-    // console.log(bids)
+    // // console.log(bids)
     // for (let e of bids.slab.nodes) {
     //     if (e.leafNode === undefined) {
     //         continue
-    //     }
-    //     console.log(e.leafNode.owner.toString())
-    //     console.log(e.leafNode.quantity.toString())
+        // }
+        // console.log(e.leafNode.owner.toString())
+        // console.log(e.leafNode.quantity.toString())
+        // console.dir(e.leafNode, {depth: null})
     // }
 
     // TODO: loadAsks
@@ -73,30 +74,30 @@ async function alice() {
 
     //TODO: add bid (buy)
     // {
-        const bids = [
-            [5, 10],
-        ];
-        for (let e of bids) {
-            const tx = new Transaction()
-            tx.add(
-                marketProxyClient.instruction.newOrderV3(
-                    {
-                        owner: owner.publicKey,
-                        payer: new PublicKey('Cn1JM7SGSLZt2wDEYf27DPh5TQZvceUgrH4izqUoQFf3'),
-                        side: 'buy',
-                        price: e[0],
-                        size: e[1],
-                        orderType: "postOnly",
-                        clientId: undefined,
-                        openOrdersAddressKey: openOrdersAddressKey,
-                        selfTradeBehavior: "abortTransaction",
-                    }
-                )
-            )
-            const signers = [owner]
-            const txHash = await connection.sendTransaction(tx, signers)
-            console.log(txHash)
-        } 
+        // const bids = [
+        //     [5, 10],
+        // ];
+        // for (let e of bids) {
+        //     const tx = new Transaction()
+        //     tx.add(
+        //         marketProxyClient.instruction.newOrderV3(
+        //             {
+        //                 owner: owner.publicKey,
+        //                 payer: new PublicKey('Cn1JM7SGSLZt2wDEYf27DPh5TQZvceUgrH4izqUoQFf3'),
+        //                 side: 'buy',
+        //                 price: e[0],
+        //                 size: e[1],
+        //                 orderType: "postOnly",
+        //                 clientId: undefined,
+        //                 openOrdersAddressKey: openOrdersAddressKey,
+        //                 selfTradeBehavior: "abortTransaction",
+        //             }
+        //         )
+        //     )
+        //     const signers = [owner]
+        //     const txHash = await connection.sendTransaction(tx, signers)
+        //     console.log(txHash)
+        // } 
     // }
 
     //TODO: add ask (sell)
@@ -183,4 +184,153 @@ async function alice() {
     // console.log(openOrdersAccount)
 }
 
-alice()
+
+async function bob() {
+//TODO: when using proxy, use func in proxy folder, wrong to use func in not proxy.
+    //TODO: when using myMarket -> owner = openorder
+    const root = web3.Keypair.fromSecretKey(Base58.decode(process.env.PRIVATEKEY))
+    const owner = new web3.Account([
+        192, 229,  15,  13,  14, 207, 106, 113, 245, 102, 249,
+          8, 162, 180, 227, 108, 222,  15,  31, 230, 108, 186,
+         10, 252, 151,  48,  86,  12, 191, 156, 146, 154, 214,
+        140,  80, 143, 142, 191, 175,  92, 178, 165, 250,  49,
+         31,  52,  43, 205, 217, 251,  39, 246, 176, 236, 105,
+         49, 129,  77, 236, 244,  31,  73,  93,  91
+    ])
+
+    const connection = new web3.Connection("https://api.devnet.solana.com/")
+    const marketAddress = new PublicKey("Ct9Sz8G9ob4MS9roTshd4paTVidAMVSNwnsikgdiPXuH")
+    const programID = new PublicKey('DSgEyE3kT8yK4Je9RSyQcPZrn6bao8nd7cq8KBtgyiz6')
+    const proxyProgramID = new PublicKey('EUdtZVeXMQoqZwyK8fFRoTMDbs9WwW1VAvkMDrdDhbnu')
+    const myMarket = await Market.load(connection, marketAddress, {}, programID, undefined)
+    const openOrdersAddressKey = new PublicKey('FmofqPk7s51qKuY8W7DW9ZpVrv4wcWJxMu3kPRrohGdJ')
+    console.log(owner.publicKey.toBase58())
+
+    const marketProxyClient = await marketProxy.load(
+        connection,
+        proxyProgramID,
+        programID,
+        marketAddress
+      );
+    
+    //TODO: openOrdersAddress
+    // const openOrdersAddressKey = await OpenOrdersPda.openOrdersAddress(
+    //     marketAddress,
+    //     owner.publicKey,
+    //     programID,
+    //     proxyProgramID
+    // );
+    // console.log(openOrdersAddressKey.toString())  
+
+    //TODO: findForMarketAndOwner
+    // const result = await OpenOrders.findForMarketAndOwner(connection, marketAddress, openOrdersAddressKey, programID)
+    // console.log(result)
+    // console.log(result[0].owner.toString())
+
+    // const result2 = await OpenOrders.findForOwner(connection, openOrdersAddressKey, programID)
+    // console.log(result2)
+    
+    
+    //TODO: loadBids
+    // const bids = await myMarket.loadBids(connection)
+    // console.log(bids)
+    // for (let e of bids.slab.nodes) {
+    //     if (e.leafNode === undefined) {
+    //         continue
+    //     }
+    //     console.log(e.leafNode.owner.toString())
+    //     console.log(e.leafNode.quantity.toString())
+    // }
+
+    // TODO: loadAsks
+    const asks = await myMarket.loadAsks(connection)
+    console.dir(asks, {depth: null})
+
+
+    //TODO: add bid (buy)
+        // const bids = [
+        //     [6.001, 8],
+        // ]
+        // for (let e of bids) {
+        //     const tx = new Transaction()
+        //     tx.add(
+        //         marketProxyClient.instruction.newOrderV3(
+        //             {
+        //                 owner: owner.publicKey,
+        //                 payer: new PublicKey('AHqVzyKgq6KGajxXtj7dbgLMt5oEz6iqnxZ97NNHXXTc'),
+        //                 side: 'buy',
+        //                 price: e[0],
+        //                 size: e[1],
+        //                 orderType: "postOnly",
+        //                 clientId: undefined,
+        //                 openOrdersAddressKey: openOrdersAddressKey,
+        //                 selfTradeBehavior: "abortTransaction",
+        //             }
+        //         )
+        //     )
+        //     const signers = [owner]
+        //     const txHash = await connection.sendTransaction(tx, signers)
+        //     console.log(txHash)
+        // } 
+
+    // TODO: add ask (sell)
+        // const ask = [
+        //     [3, 5],
+        // ];
+        // for (let e of ask) {
+        //     const tx = new Transaction()
+        //     tx.add(
+        //         marketProxyClient.instruction.newOrderV3(
+        //             {
+        //                 owner: owner.publicKey,
+        //                 payer: new PublicKey('2A7ekP1h4v46YPABuq2mzGEU7eLLkYurs7b91NpvnfkD'),
+        //                 side: 'sell',
+        //                 price: e[0],
+        //                 size: e[1],
+        //                 orderType: "postOnly",
+        //                 clientId: undefined,
+        //                 openOrdersAddressKey: openOrdersAddressKey,
+        //                 selfTradeBehavior: "abortTransaction",
+        //             }
+        //         )
+        //     )
+        //     const signers = [owner]
+        //     const txHash = await connection.sendTransaction(tx, signers)
+        //     console.log(txHash)
+        // } 
+
+    //TODO: loadOrdersForOwner
+    // const openOrderOfOwners = await myMarket.loadOrdersForOwner(connection, openOrdersAddressKey)
+    // let countBuy = 0
+    // let countSell = 0
+    // for (let e of openOrderOfOwners) {
+    //     countBuy += (e.side === 'buy')
+    //     countSell += (e.side === 'sell')
+    // }
+    // console.log(countBuy)
+    // console.log(countSell)
+
+    //TODO: cancel
+    // const openOrderOfOwners = await myMarket.loadOrdersForOwner(connection, openOrdersAddressKey)
+    // let countBuy = 0
+    // let countSell = 0
+    // for (let e of openOrderOfOwners) {
+    //     countBuy += (e.side === 'buy')
+    //     countSell += (e.side === 'sell')
+    //     const tx = new Transaction()
+    //     tx.add(
+    //         marketProxyClient.instruction.cancelOrder(owner.publicKey, e)
+    //     )
+    //     const signers = [owner]
+    //     const txHash = await connection.sendTransaction(tx, signers)
+    //     console.log(txHash)
+    // }
+    // console.log(countBuy)
+    // console.log(countSell)
+
+}
+
+
+
+// alice()
+bob()
