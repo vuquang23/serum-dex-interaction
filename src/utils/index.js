@@ -5,6 +5,7 @@ const marketLister = require("./market-lister");
 const faucet = require("./faucet");
 const { DEX_PID } = require("./common");
 const marketMaker = require("./market-maker");
+const { Connection } = require("@solana/web3.js");
 
 // Initializes the genesis state for the tests and localnetwork.
 async function genesis({ provider, proxyProgramId }) {
@@ -82,6 +83,21 @@ async function genesis({ provider, proxyProgramId }) {
     marketProxyClient,
     marketMakerAccounts
   );
+
+  const connection = new Connection("https://api.devnet.solana.com/")
+
+  await marketMaker.matchOrders(
+    connection, 
+    provider,
+    marketProxyClient,
+    marketMakerAccounts
+  )
+
+  // await marketMaker.cancelOrders(
+  //   provider,
+  //   marketProxyClient,
+  //   marketMakerAccounts
+  // )
 
   //
   // Done.

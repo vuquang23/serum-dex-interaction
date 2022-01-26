@@ -1,5 +1,6 @@
 // TODO: FLAG = 0 when not init yet.
 
+const Base58 = require('base-58')
 const anchor = require("@project-serum/anchor");
 const BN = anchor.BN;
 const { Account, Transaction, SystemProgram } = anchor.web3;
@@ -49,6 +50,8 @@ async function createFundedAccount(provider, mints, newAccount) {
   }
 
   console.log(`Marketmaker pubkey: ${newAccount.publicKey.toString()}`)
+  console.log(`marketmaker account`)
+  console.dir(newAccount, { depth: null })
 
   const marketMaker = {
     tokens: {},
@@ -63,7 +66,7 @@ async function createFundedAccount(provider, mints, newAccount) {
         SystemProgram.transfer({
           fromPubkey: provider.wallet.publicKey,
           toPubkey: newAccount.publicKey,
-          lamports: 500000000,
+          lamports: 1000000000,
         })
       );
       return tx;

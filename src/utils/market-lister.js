@@ -38,6 +38,8 @@ async function list({
 }) {
   const market = MARKET_KP;
   console.log("market account", market.publicKey.toString())
+  console.log("market account:")
+  console.dir(market, { depth: null })
 
   //! FLAG = 0
   

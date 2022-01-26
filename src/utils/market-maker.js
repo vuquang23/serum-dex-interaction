@@ -5,6 +5,8 @@ const { OpenOrdersPda, DexInstructions } = require("@project-serum/serum");
 const Base58 = require('base-58')
 const { DEX_PID } = require('./common')
 const { MARKET_KP } = require('./market-lister')
+const { OpenOrders, Market } = require('@project-serum/serum');
+const { MarketProxyInstruction } = require("@project-serum/serum/lib/market-proxy");
 // Dummy keypair.
 
 const KEYPAIR = new Account();
@@ -49,9 +51,11 @@ async function initOpenOrders(provider, marketProxy, marketMakerAccounts) {
 async function postOrders(provider, marketProxy, marketMakerAccounts) {
   const asks = [
     [6.041, 7.8],
+    [6.000, 8.5]
   ];
   const bids = [
-    [6.004, 8.5],
+    [6.000, 8.5],
+    [6.001, 10],
   ];
   const openOrdersAddressKey = await OpenOrdersPda.openOrdersAddress(
     marketProxy.market.address,
@@ -106,8 +110,75 @@ async function postOrders(provider, marketProxy, marketMakerAccounts) {
   }
 }
 
+async function matchOrders(connection, provider, marketProxy, marketMakerAccounts) {
+
+  const openOrdersAddressKey = await OpenOrdersPda.openOrdersAddress(
+    marketProxy.market.address,
+    marketMakerAccounts.account.publicKey,
+    marketProxy.dexProgramId,
+    marketProxy.proxyProgramId
+  );
+  
+
+  const myMarket = await Market.load(connection, marketProxy.market.address, {}, DEX_PID, undefined)
+  console.log(marketProxy.market.address.toString())
+  console.log('orderbook before matching...')
+
+  let openOrderOfOwners = await myMarket.loadOrdersForOwner(connection, openOrdersAddressKey)
+  let countSell = 0
+  let countBuy = 0
+  for (let e of openOrderOfOwners) {
+      countBuy += (e.side === 'buy')
+      countSell += (e.side === 'sell')
+      console.log(e)
+  }
+
+  console.log(countBuy) 
+  console.log(countSell)
+
+  const marketProxyInstruction = marketProxy.instruction
+  for (let e of openOrderOfOwners) {
+    const tx = new Transaction()
+    tx.add(
+      marketProxyInstruction.cancelOrder(openOrdersAddressKey, e)
+    )
+    const txhash = await provider.send(tx, [marketMakerAccounts.account])
+    console.log(txhash)
+  }
+
+  console.log('After cancelling...')
+  openOrderOfOwners = await myMarket.loadOrdersForOwner(connection, openOrdersAddressKey)
+  countSell = 0
+  countBuy = 0
+  for (let e of openOrderOfOwners) {
+      countBuy += (e.side === 'buy')
+      countSell += (e.side === 'sell')
+      console.log(e)
+  }
+
+  console.log(countBuy) 
+  console.log(countSell)
+
+
+  // console.log('start matching')
+  // txHash = await myMarket.matchOrders(connection, marketMakerAccounts.account)
+  // console.log(`matching tx: ${txHash}`)
+
+
+  // console.log('loading bids')
+  // const bids = await myMarket.loadBids(connection)
+  //   for (let e of bids.slab.nodes) {
+  //       if (e.leafNode === undefined) {
+  //           continue
+  //       }
+  //       console.log(e.leafNode.owner.toString())
+  //       console.log(e.leafNode.quantity.toString())
+  //   }
+}
+
 module.exports = {
   postOrders,
   initOpenOrders,
   KEYPAIR,
+  matchOrders
 };
