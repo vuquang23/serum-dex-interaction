@@ -89,7 +89,7 @@ async function alice() {
     //                 side: 'buy',
     //                 price: e[0],
     //                 size: e[1],
-    //                 orderType: "postOnly",
+    //                 orderType: 'postOnly',
     //                 clientId: undefined,
     //                 openOrdersAddressKey: openOrdersAddressKey,
     //                 selfTradeBehavior: "abortTransaction",
@@ -307,7 +307,7 @@ async function bob() {
     //     console.log(txHash)
     // } 
 
-    //TODO: loadOrdersForOwner
+    // //TODO: loadOrdersForOwner
     const openOrderOfOwners = await myMarket.loadOrdersForOwner(connection, openOrdersAddressKey)
     let countBuy = 0
     let countSell = 0
@@ -346,6 +346,6 @@ async function bob() {
 }
 
 
-
+//!FIXME: why after query loadOrdersForOwner. Only Alice or Bob has open orders.
 // alice()
 bob()

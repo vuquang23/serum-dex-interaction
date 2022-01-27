@@ -51,12 +51,11 @@ async function initOpenOrders(provider, marketProxy, marketMakerAccounts) {
 
 async function postOrders(provider, marketProxy, marketMakerAccounts) {
   const asks = [
-    // [4.9, 7.8],
-    // [4.89, 8.5]
+    [6.5, 20] 
   ];
   const bids = [
-    [6.000, 8.5],
-    [6.001, 10],
+    // [6.000, 8.5],
+    // [6.001, 10],
   ];
   const openOrdersAddressKey = await OpenOrdersPda.openOrdersAddress(
     marketProxy.market.address,
