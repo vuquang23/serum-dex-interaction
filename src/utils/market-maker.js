@@ -51,8 +51,8 @@ async function initOpenOrders(provider, marketProxy, marketMakerAccounts) {
 
 async function postOrders(provider, marketProxy, marketMakerAccounts) {
   const asks = [
-    [6.041, 7.8],
-    [6.000, 8.5]
+    // [4.9, 7.8],
+    // [4.89, 8.5]
   ];
   const bids = [
     [6.000, 8.5],

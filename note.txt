@@ -1,3 +1,1 @@
-#0 mint: CDwqjuFgz5v9fmcGENJGHPr3aqnz8v1AEMWE8o6f3XXD | god: 8LiQhj6V4Qss2bqTsLhRxgPS1jW9Y1qsdeyD8cQKAqEG
-#1 mint: 459PB7Cf1vipoLAUGzLxAe4eoiUahWtUux6LvCtDZHBA | god: Ef2hef6biXJvTwiQuME4guH8vek55RkV1TptPbnDzBa4
-
+TODO: - Fix problem: why cannot query "asks or bids" after placing?

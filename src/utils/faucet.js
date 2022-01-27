@@ -43,7 +43,7 @@ async function createMintGods(provider, mintCount) {
 
 async function createFundedAccount(provider, mints, newAccount) {
   //! FLAG = 0
-  
+  /*
   if (!newAccount) {
     newAccount = new Account();
   }
@@ -110,16 +110,16 @@ async function createFundedAccount(provider, mints, newAccount) {
 
   console.log(`OK funded MarketMaker with 2 Token`)
   
-  
+  */
 
   //! FLAG = 1
-  // const marketMaker = {
-  //   account: newAccount,
-  //   tokens: {
-  //     'FSGP998pcaWKBi9Dj7kpSam5UGXq1bF56Rvh3fXqa5bu': new PublicKey('CAoXn1EbH2Zbni6LSESqz54mkmZEU2PWNS22komvxBuT'),
-  //     '4GgE1ja9hRHZdPHnzYmteiNhbRZT1nmZWWJNwwYcc4kw': new PublicKey('E6hvyW4sLZoY4A9DnguF762QcoU7re5pxjp3tYn6D4GK')
-  //   }
-  // }
+  const marketMaker = {
+    account: newAccount,
+    tokens: {
+      'FSGP998pcaWKBi9Dj7kpSam5UGXq1bF56Rvh3fXqa5bu': new PublicKey('2A7ekP1h4v46YPABuq2mzGEU7eLLkYurs7b91NpvnfkD'),
+      '4GgE1ja9hRHZdPHnzYmteiNhbRZT1nmZWWJNwwYcc4kw': new PublicKey('AHqVzyKgq6KGajxXtj7dbgLMt5oEz6iqnxZ97NNHXXTc')
+    }
+  }
   // console.dir(marketMaker, {depth: null})
 
   return marketMaker;
