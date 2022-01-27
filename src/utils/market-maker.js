@@ -11,8 +11,8 @@ const { MarketProxyInstruction } = require("@project-serum/serum/lib/market-prox
 
 const KEYPAIR = new Account();
 
-const REFERAL = new Account(Base58.decode('5VE8dNKet98A1G1VWLTatt7hGNNmFf7Pd1ptQsPNBD5vrLfpg6kZ2drYyMU4i8JNGbMogNiwX1YWGZK47eokX559'))
 
+const admin = new Account(Base58.decode('4EHnNBG9jfvU2RE5bgXd9Fzn6bbKTnDdvVeQmJScpLTFyMyAy7QcLdnLuxEz7fqJLbHdZg6pZggGmumPX8hbA5Qg'))
 // For9GCz5oSNic3vpLwtSq3aKeqNEbTqBrtEpMQYRKY7i
 // const OPENORDERS = new Account()
 
@@ -43,7 +43,7 @@ async function initOpenOrders(provider, marketProxy, marketMakerAccounts) {
     )
   );
 
-  let signers = [marketMakerAccounts.account];
+  let signers = [marketMakerAccounts.account, admin];
   const txHash = await provider.send(tx, signers);
   console.log(txHash)
 }

@@ -61,8 +61,9 @@ class Identity {
     this.proxyRevoked(ix);
   }
   proxy(ix) {
+    const admin = new PublicKey('2B8SUxUHwUMCaGBR564L5KLDGJ7SyjbZDzXZifbvrhdv')
     ix.keys = [
-      { pubkey: SYSVAR_RENT_PUBKEY, isWritable: false, isSigner: false },
+      { pubkey: admin, isWritable: false, isSigner: true },
       ...ix.keys,
     ];
   }
