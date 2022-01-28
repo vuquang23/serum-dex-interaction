@@ -45,7 +45,7 @@ async function initOpenOrders(provider, marketProxy, marketMakerAccounts) {
 
   let signers = [marketMakerAccounts.account, admin];
   const txHash = await provider.send(tx, signers);
-  console.log(txHash)
+  console.log(`init open order account txHash: ${txHash}`)
 }
 
 async function postOrders(provider, marketProxy, marketMakerAccounts) {

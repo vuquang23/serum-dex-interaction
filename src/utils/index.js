@@ -78,11 +78,11 @@ async function genesis({ provider, proxyProgramId }) {
   //
   // Market maker posts trades on the orderbook.
   //
-  // await marketMaker.postOrders(
-  //   provider,
-  //   marketProxyClient,
-  //   marketMakerAccounts
-  // );
+  await marketMaker.postOrders(
+    provider,
+    marketProxyClient,
+    marketMakerAccounts
+  );
 
   // const connection = new Connection("https://api.devnet.solana.com/")
 

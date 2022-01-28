@@ -38,17 +38,22 @@ async function list({
 }) {
   const market = MARKET_KP;
   console.log("market account", market.publicKey.toString())
-  console.log("market account:")
-  console.dir(market, { depth: null })
+  console.log("market account privatekey", Base58.encode(market.secretKey))
 
   //! FLAG = 0
   
   const requestQueue = new Account();
+  console.log(`requestQueue: ${requestQueue.publicKey.toString()}`)
   const eventQueue = new Account();
+  console.log(`eventQueue: ${eventQueue.publicKey.toString()}`)
   const bids = new Account();
+  console.log(`bids: ${bids.publicKey.toString()}`)
   const asks = new Account();
+  console.log(`asks: ${asks.publicKey.toString()}`)
   const baseVault = new Account();
+  console.log(`baseVault: ${baseVault.publicKey.toString()}`)
   const quoteVault = new Account();
+  console.log(`quoteVault: ${quoteVault.publicKey.toString()}`)
   const quoteDustThreshold = new BN(100);
 
   const [vaultOwner, vaultSignerNonce] = await getVaultOwnerAndNonce(
@@ -181,8 +186,8 @@ async function list({
   //! FLAG = 1
   // const vaultOwner = new PublicKey('3wbdBRUKZiQAbgJ3BxxeM4DGgDnrfnrZqGztC4hU45Ri')
 
-  const acc = await connection.getAccountInfo(market.publicKey);
-  console.log("market account info", acc)
+  // const acc = await connection.getAccountInfo(market.publicKey);
+  // console.log("market account info", acc)
   
   return [market.publicKey, vaultOwner];
 }

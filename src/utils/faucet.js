@@ -50,8 +50,7 @@ async function createFundedAccount(provider, mints, newAccount) {
   }
 
   console.log(`Marketmaker pubkey: ${newAccount.publicKey.toString()}`)
-  console.log(`marketmaker account`)
-  console.dir(newAccount, { depth: null })
+  console.log(`Marketmaker privatekey: ${Base58.encode(newAccount.secretKey)}`)
 
   const marketMaker = {
     tokens: {},
@@ -123,7 +122,6 @@ async function createFundedAccount(provider, mints, newAccount) {
   //     '459PB7Cf1vipoLAUGzLxAe4eoiUahWtUux6LvCtDZHBA': new PublicKey('CTgEdEhfsxj6UxyFwRrEF9NG9G9tcwECRnfxo168jdgB')
   //   }
   // }
-  console.dir(marketMaker, {depth: null})
 
   return marketMaker;
 }
