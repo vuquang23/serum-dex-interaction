@@ -1,1 +1,0 @@
-TODO: - Fix problem: why cannot query "asks or bids" after placing?

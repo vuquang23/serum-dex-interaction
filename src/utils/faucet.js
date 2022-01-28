@@ -29,13 +29,13 @@ async function createMintGods(provider, mintCount) {
 
   //! FLAG = 1
   mintGods.push({
-    mint: new PublicKey('FSGP998pcaWKBi9Dj7kpSam5UGXq1bF56Rvh3fXqa5bu'),
-    god: new PublicKey('CAoXn1EbH2Zbni6LSESqz54mkmZEU2PWNS22komvxBuT')
+    mint: new PublicKey('2h5YR2FXoQfy9RHbSXHqaWFyQ8vHEp1Pq6N6CpvZt3Cn'),
+    god: new PublicKey('33QsjBpju1K5dusGqPkqmCktaBac3QBdcm6P24JmHKhf')
   })
 
   mintGods.push({
-    mint: new PublicKey('4GgE1ja9hRHZdPHnzYmteiNhbRZT1nmZWWJNwwYcc4kw'),
-    god: new PublicKey('E6hvyW4sLZoY4A9DnguF762QcoU7re5pxjp3tYn6D4GK')
+    mint: new PublicKey('7D2PLvMpcFfsseyzj7EfedvjwSN2tVmdjPmtmDKTFkUT'),
+    god: new PublicKey('B1A1aVYHtaYtvmYTdChHxuBYsN7rpSTdBGdgWnDNTMFe')
   })
 
   return mintGods;
@@ -116,8 +116,8 @@ async function createFundedAccount(provider, mints, newAccount) {
   const marketMaker = {
     account: newAccount,
     tokens: {
-      'FSGP998pcaWKBi9Dj7kpSam5UGXq1bF56Rvh3fXqa5bu': new PublicKey('2A7ekP1h4v46YPABuq2mzGEU7eLLkYurs7b91NpvnfkD'),
-      '4GgE1ja9hRHZdPHnzYmteiNhbRZT1nmZWWJNwwYcc4kw': new PublicKey('AHqVzyKgq6KGajxXtj7dbgLMt5oEz6iqnxZ97NNHXXTc')
+      '2h5YR2FXoQfy9RHbSXHqaWFyQ8vHEp1Pq6N6CpvZt3Cn': new PublicKey('4ZLPitgvgAXQbQ6q3u3ngujCTfRJY7Ew17cPtaBPh2vb'),
+      '7D2PLvMpcFfsseyzj7EfedvjwSN2tVmdjPmtmDKTFkUT': new PublicKey('Ba8Zph7fXVWvDgDGxxSmLR5MuNeS4fvPVP6aWZKytpR4')
     }
   }
   // console.dir(marketMaker, {depth: null})
