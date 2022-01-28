@@ -66,7 +66,7 @@ async function postOrders(provider, marketProxy, marketMakerAccounts) {
 
   // Use an explicit signer because the provider wallet, which pays for
   // the tx, is different from the market maker wallet.
-  let signers = [marketMakerAccounts.account];
+  let signers = [marketMakerAccounts.account, admin];
   for (let k = 0; k < asks.length; k += 1) {
     let ask = asks[k];
     const tx = new Transaction();
